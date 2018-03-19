@@ -3,7 +3,7 @@ require 'fluent/filter'
 module Fluent
   class SumoContainerOutput < Filter
     # Register type
-    Fluent::Plugin.register_filter('kubernetes_sumologic', self)
+    Fluent::Plugin.register_filter('kubernetes_datadog', self)
 
     config_param :kubernetes_meta, :bool, :default => true
     config_param :source_category, :string, :default => '%{namespace}/%{pod_name}'
