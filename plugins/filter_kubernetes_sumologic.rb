@@ -31,8 +31,8 @@ module Fluent
 
     def filter(tag, time, record)
       # Set the sumo metadata fields
-      sumo_metadata = record['_sumo_metadata'] || {}
-      record['_sumo_metadata'] = sumo_metadata
+      sumo_metadata = record['dd_metadata'] || {}
+      record['dd_metadata'] = sumo_metadata
 
       sumo_metadata[:log_format] = @log_format
       sumo_metadata[:host] = @source_host if @source_host
