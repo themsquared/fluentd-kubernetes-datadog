@@ -1,7 +1,7 @@
 require 'fluent/filter'
 
 module Fluent
-  class ddContainerOutput < Filter
+  class DDContainerOutput < Filter
     # Register type
     Fluent::Plugin.register_filter('kubernetes_datadog', self)
 
