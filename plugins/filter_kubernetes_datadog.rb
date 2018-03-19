@@ -1,7 +1,7 @@
 require 'fluent/filter'
 
 module Fluent
-  class SumoContainerOutput < Filter
+  class ddContainerOutput < Filter
     # Register type
     Fluent::Plugin.register_filter('kubernetes_datadog', self)
 
@@ -30,18 +30,18 @@ module Fluent
     end
 
     def filter(tag, time, record)
-      # Set the sumo metadata fields
-      sumo_metadata = record['dd_metadata'] || {}
-      record['dd_metadata'] = sumo_metadata
+      # Set the dd metadata fields
+      dd_metadata = record['dd_metadata'] || {}
+      record['dd_metadata'] = dd_metadata
 
-      sumo_metadata[:log_format] = @log_format
-      sumo_metadata[:host] = @source_host if @source_host
-      sumo_metadata[:source] = @source_name if @source_name
+      dd_metadata[:log_format] = @log_format
+      dd_metadata[:host] = @source_host if @source_host
+      dd_metadata[:source] = @source_name if @source_name
 
       unless @source_category.nil?
-        sumo_metadata[:category] = @source_category.dup
+        dd_metadata[:category] = @source_category.dup
         unless @source_category_prefix.nil?
-          sumo_metadata[:category].prepend(@source_category_prefix)
+          dd_metadata[:category].prepend(@source_category_prefix)
         end
       end
 
@@ -126,26 +126,26 @@ module Fluent
           return nil
         end
 
-        sumo_metadata[:log_format] = annotations['datadoghq.com/format'] if annotations['datadoghq.com/format']
+        dd_metadata[:log_format] = annotations['datadoghq.com/format'] if annotations['datadoghq.com/format']
 
         if annotations['datadoghq.com/sourceHost'].nil?
-          sumo_metadata[:host] = sumo_metadata[:host] % k8s_metadata
+          dd_metadata[:host] = dd_metadata[:host] % k8s_metadata
         else
-          sumo_metadata[:host] = annotations['datadoghq.com/sourceHost'] % k8s_metadata
+          dd_metadata[:host] = annotations['datadoghq.com/sourceHost'] % k8s_metadata
         end
 
         if annotations['datadoghq.com/sourceName'].nil?
-          sumo_metadata[:source] = sumo_metadata[:source] % k8s_metadata
+          dd_metadata[:source] = dd_metadata[:source] % k8s_metadata
         else
-          sumo_metadata[:source] = annotations['datadoghq.com/sourceName'] % k8s_metadata
+          dd_metadata[:source] = annotations['datadoghq.com/sourceName'] % k8s_metadata
         end
 
         if annotations['datadoghq.com/sourceCategory'].nil?
-          sumo_metadata[:category] = sumo_metadata[:category] % k8s_metadata
+          dd_metadata[:category] = dd_metadata[:category] % k8s_metadata
         else
-          sumo_metadata[:category] = (annotations['datadoghq.com/sourceCategory'] % k8s_metadata).prepend(@source_category_prefix)
+          dd_metadata[:category] = (annotations['datadoghq.com/sourceCategory'] % k8s_metadata).prepend(@source_category_prefix)
         end
-        sumo_metadata[:category].gsub!('-', @source_category_replace_dash)
+        dd_metadata[:category].gsub!('-', @source_category_replace_dash)
 
         # Strip kubernetes metadata from json if disabled
         if annotations['datadoghq.com/kubernetes_meta'] == 'false' || !@kubernetes_meta
