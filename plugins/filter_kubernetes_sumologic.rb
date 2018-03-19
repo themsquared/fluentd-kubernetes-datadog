@@ -84,7 +84,7 @@ module Fluent
         }
         record['pod_name'] =  kubernetes['pod_name']
         record['container_name'] = kubernetes['container_name']
-        record['ddtags'] = "pod_name:"+kubernetes['pod_name']+",container_id:"+record['docker']['container_id']+",kube_namespace:"+kubernetes['namespace_name']+"kube_container_name:"+kubernetes['container_name']
+        record['ddtags'] = "pod_name:"+kubernetes['pod_name']+",container_id:"+record['docker']['container_id']+",kube_namespace:"+kubernetes['namespace_name']+",kube_container_name:"+kubernetes['container_name']
 
         unless @exclude_namespace_regex.empty?
           if Regexp.compile(@exclude_namespace_regex).match(k8s_metadata[:namespace])
