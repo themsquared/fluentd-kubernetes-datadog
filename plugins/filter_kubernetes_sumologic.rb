@@ -82,6 +82,9 @@ module Fluent
             :container => kubernetes['container_name'],
             :source_host => kubernetes['host'],
         }
+        record['pod_name'] =  kubernetes['pod_name']
+        record['container_name'] = kubernetes['container_name']
+        record['ddtags'] = "pod_name:"+kubernetes['pod_name']+",container_id:"+record['docker']['container_id']
 
         unless @exclude_namespace_regex.empty?
           if Regexp.compile(@exclude_namespace_regex).match(k8s_metadata[:namespace])
