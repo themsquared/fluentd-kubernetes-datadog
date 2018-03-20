@@ -23,8 +23,6 @@ The plugin runs as a Kubernetes [DaemonSet](http://kubernetes.io/docs/admin/daem
 - [Taints and Tolerations](#taints-and-tolerations)
 
 
-![deployment](https://github.com/themsquared/fluentd-kubernetes-datadog/blob/master/screenshots/kubernetes.png)
-
 # Step 1  Create a Datadog account
 
 Instructions to create Datadog Account here...
