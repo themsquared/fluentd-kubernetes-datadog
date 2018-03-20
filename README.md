@@ -33,7 +33,7 @@ Instructions to create Datadog Account here...
 
 Create a secret in Kubernetes with the HTTP source URL. If you want to change the secret name, you must modify the Kubernetes manifest accordingly.
 
-`kubectl create secret generic datadog --from-literal=dd_api_key=<<Your Datadog API Key>>`
+`kubectl create secret generic datadog --from-literal=api_key=<<Your Datadog API Key>>`
 
 You should see the confirmation message 
 
@@ -49,7 +49,7 @@ Before you start, see [Environment variables](#environment-variables) for inform
 
 See the sample Kubernetes DaemonSet and Role in [fluentd.yaml](/daemonset/rbac/fluentd.yaml).
 
-1. Clone the [GitHub repo](https://github.com/Datadog/fluentd-kubernetes-sumologic).
+1. Clone the [GitHub repo](https://github.com/themsquared/fluentd-kubernetes-datadog).
 
 2. In `fluentd-kubernetes-datadog`, install the chart using `kubectl`.
 

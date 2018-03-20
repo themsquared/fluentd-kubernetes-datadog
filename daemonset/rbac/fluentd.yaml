@@ -38,15 +38,15 @@ subjects:
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
-  name: fluentd-sumologic
+  name: fluentd-datadog
   labels:
-    app: fluentd-sumologic
+    app: fluentd-datadog
     version: v1
 spec:
   template:
     metadata:
       labels:
-        name: fluentd-sumologic
+        name: fluentd-datadog
     spec:
       serviceAccountName: fluentd
       volumes:
@@ -59,7 +59,7 @@ spec:
         hostPath:
           path: /var/lib/docker
       containers:
-      - image: sumologic/fluentd-kubernetes-sumologic:latest
+      - image: themsquared/dd-fluentd:latest
         name: fluentd
         imagePullPolicy: Always
         volumeMounts:
@@ -75,11 +75,11 @@ spec:
         - name: pos-files
           mountPath: /mnt/pos/
         env:
-        - name: COLLECTOR_URL
+        - name: DD_API_KEY
           valueFrom:
             secretKeyRef:
-              name: sumologic
-              key: collector-url
+              name: datadog
+              key: api_Key
       tolerations:
           #- operator: "Exists"
           - effect: "NoSchedule"
