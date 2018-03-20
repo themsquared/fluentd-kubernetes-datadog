@@ -12,7 +12,7 @@ The plugin runs as a Kubernetes [DaemonSet](http://kubernetes.io/docs/admin/daem
 - [Environment variables](#environment-variables)
     + [Override environment variables using annotations](#override-environment-variables-using-annotations)
     + [Exclude data using annotations](#exclude-data-using-annotations)
-- [Step 4 Set up Heapster for metric collection](#step-4-set-up-heapster-for-metric-collection)
+- [Step 4 Set up Datadog Agent for Metric Collection](#step-4-set-up-datadog-agent-for-metric-collection)
   * [Kubernetes ConfigMap](#kubernetes-configmap)
   * [Kubernetes Service](#kubernetes-service)
   * [Kubernetes Deployment](#kubernetes-deployment)
