@@ -11,6 +11,7 @@ spec:
       labels:
         name: fluentd-datadog
     spec:
+      serviceAccount: dd
       volumes:
       - name: pos-files
         emptyDir: {}
